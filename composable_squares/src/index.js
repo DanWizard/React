@@ -12,7 +12,9 @@ const Index = (props) => {
 			<Blue />
 			<Red />
 			<Pink />
+			<button onClick={()=> alert("You clicked me!")}>Click Me!</button>
 		</div>
+		
 	);
 };
 
