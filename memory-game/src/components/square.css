@@ -5,3 +5,12 @@
 	border-width: 2px;
 	display: inline-block;
 }
+
+#blue{
+	height: 200px;
+	width: 200px;
+	border: solid black;
+	border-width: 2px;
+	display: inline-block;
+	background-color: blue;
+}
