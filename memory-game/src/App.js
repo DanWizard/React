@@ -24,6 +24,7 @@ class App extends React.Component {
         {position: 11, color: 'white'},
         {position: 12, color: 'white'},
       ],
+      timer: 3,
 
       start: 0,
 
@@ -32,7 +33,15 @@ class App extends React.Component {
     };
   }
 
+  startTimer(props){
+    props.start += 1
+    this.setState(props)
+    console.log(props)
+    this.myInterval = setInterval(()=>{
+      this.setState({timer: this.state.timer - 1})
+    }, 1000 )
 
+  }
 
   startGame(props){
     console.log(props)
@@ -57,15 +66,16 @@ class App extends React.Component {
   }
 
   render() {
+    const count = this.state.timer
     const status = this.state.start
     const style = this.state.shape
     let phase
 
     if (status == 0) {
-      phase = <button onClick={() => this.startGame(this.state) }>Start Game</button>;
+      phase = <button onClick={() => this.startTimer(this.state) }>Start Game</button>;
     }
     if (status == 1) {
-      phase = <h3> Get Ready to memorize cells in </h3>;
+      phase = <h2> Get Ready to memorize cells in: {count} </h2>;
     }
     if (status == 2) {
       phase = null;
