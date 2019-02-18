@@ -39,17 +39,20 @@ class App extends React.Component {
   }
   checkAnswer(props){
     console.log("yo")
+    console.log(this.state.answer)
+    console.log(this.state.guess)
     let index
-    for (var i = props.answer.length - 1; i >= 0; i--) {
-      for (var v = props.guess.length - 1; v >= 0; v--) {
-        if(props.answer[i] != props.guess[v]){
-          index = props.answer[i]
+    for (var i = props.grid.length - 1; i >= 0; i--) {
+      for (var v = props.answer.length - 1; v >= 0; v--) {
+        if(props.grid[i].position == props.answer[v]){
+          index = props.answer[v]
           props.grid[index].color = 'red'   
         }
-        if(props.answer[i] == props.guess[v]){
-          index = props.answer[i]
+        if(props.grid[i].position == props.guess[v]){
+          index = props.guess[v]
           props.grid[index].color = 'green'
         }
+        
       }
     }
     props.start += 1
@@ -60,12 +63,13 @@ class App extends React.Component {
     if(this.state.start == 3) {
       map.grid[props].color = "grey"    
       map.guess.push(props)
-      console.log(map.guess)
+      // console.log(map.guess)
       this.setState(map)
     }
   }
 
   resetGrid(props){
+    
     for (var i = this.state.grid.length - 1; i >= 0; i--) {
        props.grid[i].color = "white"
     }
@@ -76,7 +80,10 @@ class App extends React.Component {
       this.setState(props)
     }
     if(this.state.start == 4){
-      
+      props.answer = []
+      props.guess = []
+      props.start = 0
+      this.setState(props)
     }
   }
 
@@ -111,9 +118,9 @@ class App extends React.Component {
       }
     }
     this.setState({answer: arr})
-    console.log(this.state.answer)
+    // console.log(this.state.answer)
     this.startTimer(this.state)
-    console.log(this.state.timer)
+    // console.log(this.state.timer)
    }
 
 
@@ -172,7 +179,7 @@ class App extends React.Component {
     if (status == 4) {
       phase = 
       <div>
-        <button>Play Again</button>
+        <button onClick={() => this.resetGrid(this.state) }>Play Again</button>
       </div> 
     }   
 
