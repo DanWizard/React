@@ -48,11 +48,12 @@ class App extends React.Component {
           index = props.answer[v]
           props.grid[index].color = 'red'   
         }
-        if(props.grid[i].position == props.guess[v]){
-          index = props.guess[v]
-          props.grid[index].color = 'green'
+        for (var x = props.guess.length - 1; x >= 0; x--) {
+          if(props.answer[v] == props.guess[x]){
+            index = props.guess[x]
+            props.grid[index].color = 'green'
+          }
         }
-        
       }
     }
     props.start += 1
