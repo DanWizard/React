@@ -31,13 +31,53 @@ class App extends React.Component {
 
       shape: "button",
 
-      answer: []
+      answer: [],
+
+      guess: []
     
     };
   }
+  checkAnswer(props){
+    console.log("yo")
+    let index
+    for (var i = props.answer.length - 1; i >= 0; i--) {
+      for (var v = props.guess.length - 1; v >= 0; v--) {
+        if(props.answer[i] != props.guess[v]){
+          index = props.answer[i]
+          props.grid[index].color = 'red'   
+        }
+        if(props.answer[i] == props.guess[v]){
+          index = props.answer[i]
+          props.grid[index].color = 'green'
+        }
+      }
+    }
+    props.start += 1
+    this.setState(props)
+  }
+  guessAnswer(props){
+    let map = this.state
+    if(this.state.start == 3) {
+      map.grid[props].color = "grey"    
+      map.guess.push(props)
+      console.log(map.guess)
+      this.setState(map)
+    }
+  }
 
-  guessAnswer(){
-    
+  resetGrid(props){
+    for (var i = this.state.grid.length - 1; i >= 0; i--) {
+       props.grid[i].color = "white"
+    }
+    this.setState(props)
+    if(this.state.start == 2){
+      clearInterval(this.myInterval)
+      props.start += 1
+      this.setState(props)
+    }
+    if(this.state.start == 4){
+      
+    }
   }
 
   startTimer(props){
@@ -45,11 +85,17 @@ class App extends React.Component {
     this.setState(props)
     // console.log(props)
     this.myInterval = setInterval(()=>{
-      if(this.state.timer == 0){
-      // console.log("yo1")
-      this.startGame(props)
-      this.setState({timer: 3})
-      return
+      if(this.state.timer == 0 && this.state.start == 1){
+        // console.log("yo1")
+        this.startGame(props)
+        this.setState({timer: 3})
+        return
+      }
+      if(this.state.timer == 0 && this.state.start == 2){
+        // console.log("yo1")
+        this.resetGrid(props)
+        this.setState({timer: 3})
+        return
       }
       this.setState({timer: this.state.timer - 1})
     }, 1000 )
@@ -66,6 +112,8 @@ class App extends React.Component {
     }
     this.setState({answer: arr})
     console.log(this.state.answer)
+    this.startTimer(this.state)
+    console.log(this.state.timer)
    }
 
 
@@ -86,8 +134,8 @@ class App extends React.Component {
         }
       }
     }
-    props.start += 1
-    this.setState(props)
+    // props.start += 1
+    // this.setState(props)
     // console.log(props)
     clearInterval(this.myInterval)
     this.recordAnswer()
@@ -97,45 +145,58 @@ class App extends React.Component {
     const count = this.state.timer
     const status = this.state.start
     const style = this.state.shape
-    let phase
+    let phase, click
 
     if (status == 0) {
-      phase = <button onClick={() => this.startTimer(this.state) }>Start Game</button>;
+      phase = 
+      <div id ="button">
+        <button onClick={() => this.startTimer(this.state) }>Start Game</button>;
+      </div>
+      
     }
     if (status == 1) {
-      phase = <h2> Get Ready to memorize cells in: {count} </h2>;
+      phase = <h2>Get Ready to memorize cells in: {count} </h2>;
     }
     if (status == 2) {
-      phase = null;
+      phase = <h2>Time left to memorize: {count}</h2>;
+
     }
     if (status == 3) {
-      phase = <h3> Guess the correct cells </h3>
+      phase = 
+      <div>
+        <h2> Guess the correct cells </h2>
+        <button onClick={() => this.checkAnswer(this.state) }>Check</button>
+      </div>
+      
     }
     if (status == 4) {
-      phase = <button>Play Again</button>
-    }    
+      phase = 
+      <div>
+        <button>Play Again</button>
+      </div> 
+    }   
 
     return (
       <div >
         <h1>Memory Game</h1>
         <div id='container'>
           <div id= "row">
-            <Square color = {this.state.grid[0].color} position = {this.state.grid[0].postion}/>
-            <Square color = {this.state.grid[1].color} position = {this.state.grid[1].postion}/>
-            <Square color = {this.state.grid[2].color} position = {this.state.grid[2].postion}/>
-            <Square color = {this.state.grid[3].color} position = {this.state.grid[3].postion}/>
+            <Square grid = {this.state} color = {this.state.grid[0].color} position = {this.state.grid[0].position} guessed ={ (grid) => this.guessAnswer(grid)}/>
+            <Square grid = {this.state} color = {this.state.grid[1].color} position = {this.state.grid[1].position}guessed ={ (grid) => this.guessAnswer(grid)}/>
+            <Square grid = {this.state} color = {this.state.grid[2].color} position = {this.state.grid[2].position}guessed ={ (grid) => this.guessAnswer(grid)}/>
+            <Square grid = {this.state} color = {this.state.grid[3].color} position = {this.state.grid[3].position}guessed ={ (grid) => this.guessAnswer(grid)}/>
           </div>
           <div id= "row">
-            <Square color = {this.state.grid[4].color} position = {this.state.grid[4].postion}/>
-            <Square color = {this.state.grid[5].color} position = {this.state.grid[5].postion}/>
-            <Square color = {this.state.grid[6].color} position = {this.state.grid[6].postion}/>
-            <Square color = {this.state.grid[7].color} position = {this.state.grid[7].postion}/>
+            <Square grid = {this.state} color = {this.state.grid[4].color} position = {this.state.grid[4].position}guessed ={ (grid) => this.guessAnswer(grid)}/>
+            <Square grid = {this.state} color = {this.state.grid[5].color} position = {this.state.grid[5].position}guessed ={ (grid) => this.guessAnswer(grid)}/>
+            <Square grid = {this.state} color = {this.state.grid[6].color} position = {this.state.grid[6].position}guessed ={ (grid) => this.guessAnswer(grid)}/>
+            <Square grid = {this.state} color = {this.state.grid[7].color} position = {this.state.grid[7].position}guessed ={ (grid) => this.guessAnswer(grid)}/>
           </div>
           <div id= "row">
-            <Square color = {this.state.grid[8].color} position = {this.state.grid[8].postion}/>
-            <Square color = {this.state.grid[9].color} position = {this.state.grid[9].postion}/>
-            <Square color = {this.state.grid[10].color} position = {this.state.grid[10].postion}/>
-            <Square color = {this.state.grid[11].color} position = {this.state.grid[11].postion}/>
+            <Square grid = {this.state} color = {this.state.grid[8].color} position = {this.state.grid[8].position}guessed ={ (grid) => this.guessAnswer(grid)}/>
+            <Square grid = {this.state} color = {this.state.grid[9].color} position = {this.state.grid[9].position}guessed ={ (grid) => this.guessAnswer(grid)}/>
+            <Square grid = {this.state} color = {this.state.grid[10].color} position = {this.state.grid[10].position}guessed ={ (grid) => this.guessAnswer(grid)}/>
+            <Square grid = {this.state} color = {this.state.grid[11].color} position = {this.state.grid[11].position}guessed ={ (grid) => this.guessAnswer(grid)}/>
           </div>
           <div id={style}>
             {phase}

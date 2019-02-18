@@ -14,3 +14,30 @@
 	display: inline-block;
 	background-color: blue;
 }
+
+#grey{
+	height: 200px;
+	width: 200px;
+	border: solid black;
+	border-width: 2px;
+	display: inline-block;
+	background-color: grey;
+}
+
+#red{
+	height: 200px;
+	width: 200px;
+	border: solid black;
+	border-width: 2px;
+	display: inline-block;
+	background-color: red;
+}
+
+#green{
+	height: 200px;
+	width: 200px;
+	border: solid black;
+	border-width: 2px;
+	display: inline-block;
+	background-color: green;
+}

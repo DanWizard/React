@@ -10,7 +10,7 @@ class Square extends React.Component {
 	}
 	render(){
 		return(
-			<div id ={this.props.color}>{this.props.position}</div>
+			<div id ={this.props.color} onClick={() => this.props.guessed(this.props.position)}>{this.props.position}</div>
 		)
 	}
 }
