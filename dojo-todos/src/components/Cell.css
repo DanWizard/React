@@ -1,0 +1,43 @@
+.cell{
+	position: relative;
+	height: 50px;
+
+}
+
+.cell p{
+	position: absolute;
+	left: 49%;
+	top: 20%;
+	margin-bottom: 0px;
+}
+
+
+.fa-circle-thin{
+	position: absolute;
+	top: 10%;
+	left: 2.5%
+}	
+
+.fa-times{
+	display: none;
+}
+
+.complete{
+	color: green;
+	position: absolute;
+	top: 21.5%;
+	left: 3.5%
+}
+
+.incomplete{
+	display: none;
+}
+
+
+.cell:hover  .fa-times{
+	display: block;
+	color: red;
+	position: absolute;
+	left:90%;
+	top: 20%;
+}
