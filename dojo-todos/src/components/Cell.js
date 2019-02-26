@@ -14,7 +14,7 @@ class Cell extends Component {
   }
   completeHandler(evt) {
       console.log(this.props.num)
-      this.props.completed(evt, this.props.num);
+      this.props.complete(evt, this.props.num);
   }
 
   render() {
@@ -22,7 +22,7 @@ class Cell extends Component {
     	return (
        <div className= 'row cell' id='cell' >
          <i className='fa fa-circle-thin fa-2x' onClick={this.completeHandler}></i>
-         <i className='fa fa-check' className={phase} ></i>
+         <i className={`fa fa-check ${this.props.status}`}></i>
          <p>{this.props.text}</p>
          <i className='fa fa-times' onClick={this.deleteHandler} ></i>
        </div>

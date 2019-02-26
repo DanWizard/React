@@ -19,15 +19,37 @@ class ToDo extends Component {
   removeToDo(evt, index){
     const list = Object.assign([], this.state.todos)
     list.splice(index, 1);
-    this.setState({todos: list})
+    this.setState({
+      todos: this.state.todos.filter((td, Tindex) => Tindex !== index),
+      completed_todos: this.state.completed_todos.filter((cd) => cd.index !== index)
+    })
   }
 
   completedToDo(evt, index){
-    console.log(index)
-    console.log('hello')
-    const list = Object.assign([], this.state.todos)
-    list.splice(index, 1);
-    this.setState({todos: list})
+    const todos = Object.assign([], this.state.todos)
+    if(todos[index].status == 'incomplete'){
+      todos[index].status = 'complete'
+      todos[index].index = index
+      let todo = todos[index]
+      console.log('todo', todo)
+      
+      console.log("todo",todos[index])
+      this.setState({todos: todos, completed_todos:this.state.completed_todos.concat(todo)})
+      console.log("completed_todo",this.state.completed_todos)
+    }
+    else{
+      console.log('hello')
+      let newStatus = 'incomplete'
+      this.setState({
+        completed_todos: this.state.completed_todos.filter((ct)=>  index !== ct.index ),
+        todos: this.state.todos.map((td, Tindex) => {
+          if(Tindex !== index) return td;
+          return {...td, status: newStatus}
+        })
+
+      })
+      
+    }
   }
 
 	createToDo(evt){

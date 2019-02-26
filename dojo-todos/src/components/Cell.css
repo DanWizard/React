@@ -22,15 +22,19 @@
 	display: none;
 }
 
+
+
+
+.incomplete{
+	display: none;
+}
+
 .complete{
+	display: block;
 	color: green;
 	position: absolute;
 	top: 21.5%;
 	left: 3.5%
-}
-
-.incomplete{
-	display: none;
 }
 
 
