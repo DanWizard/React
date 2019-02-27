@@ -8,8 +8,6 @@ class ToDo extends Component {
 		this.state = {
 			todo: '',
 			todos: [],
-      // completed_todos: [],
-      // active_todos: [],
       phase: 'all'
 		}
 		this.handleChange = this.handleChange.bind(this)
@@ -24,45 +22,25 @@ class ToDo extends Component {
 
 
   removeToDo(evt, index){
-    this.setState({
-      todos: this.state.todos.filter((td, Tindex) => Tindex !== index),
-      // completed_todos: this.state.completed_todos.filter((cd) => cd.index !== index),
-      // active_todos: this.state.todos.filter((at) => at.status !== 'complete')
-    })
+    this.setState({ todos: this.state.todos.filter((td, Tindex) => Tindex !== index)})
   }
 
   completedToDo(evt, index){
     const todos = Object.assign([], this.state.todos)
     if(todos[index].status == 'incomplete'){
       todos[index].status = 'complete'
-      // todos[index].index = index
-      // let todo = todos[index]
-      // console.log('todo', todo)
-      
-      // console.log("todo",todos[index])
       this.setState({
         todos: todos, 
-        // completed_todos:this.state.completed_todos.concat(todo),
-        // active_todos: this.state.todos.filter((at) => at.status !== 'complete')
       })
-      // console.log("completed_todo",this.state.completed_todos)
     }
     else{
-      // const active = Object.assign([], this.state.completed_todos.filter((ct)=> index == ct.index ))
-      // active.status = 'incomplete'
-      // console.log("active", active)
       let newStatus = 'incomplete'
       this.setState({
-        // completed_todos: this.state.completed_todos.filter((ct)=>  index !== ct.index ),
         todos: this.state.todos.map((td, Tindex) => {
           if(Tindex !== index) return td;
           return {...td, status: newStatus}
-        }),
-      }, 
-
-      // this.setState({active_todos: this.state.todos.filter((at) => at.status !== 'complete') })
-      )
-      
+        })
+      })
     }
   }
 
@@ -73,8 +51,7 @@ class ToDo extends Component {
 		list.push(todo)
 		this.setState({
       todos: list, 
-      todo:{name:'', status:''},
-      // active_todos: list
+      todo:{name:'', status:''}
     })
     console.log(this.state.todo)
 	}
