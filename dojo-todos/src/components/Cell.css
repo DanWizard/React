@@ -4,6 +4,14 @@
 
 }
 
+
+.input{
+	background: grey;
+	position: absolute;
+	left: 35%;
+	top: 7%;
+}
+
 .cell p{
 	position: absolute;
 	left: 49%;

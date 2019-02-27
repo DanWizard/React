@@ -10,6 +10,7 @@ class ToDo extends Component {
 			todos: [],
       phase: 'all'
 		}
+    this.updateChange = this.updateChange.bind(this)
 		this.handleChange = this.handleChange.bind(this)
 		this.createToDo = this.createToDo.bind(this)
     this.removeToDo = this.removeToDo.bind(this)
@@ -73,6 +74,14 @@ class ToDo extends Component {
       }
   }
 
+  updateChange(index, name){
+    console.log('index', index)
+    console.log('name', name)
+    const todos = Object.assign([], this.state.todos)
+    todos[index].name = name
+    this.setState({todos: todos})
+  }
+
   	render() {
         const phase = this.state.phase
 
@@ -86,7 +95,7 @@ class ToDo extends Component {
           content = 
               this.state.todos.map((todo, index)=>{
                 return(
-                  <Cell complete={this.completedToDo} status={todo.status} text={todo.name} remove={this.removeToDo} num={index}/>
+                  <Cell update={this.updateChange} complete={this.completedToDo} status={todo.status} text={todo.name} remove={this.removeToDo} num={index}/>
                 )
               })
           clear = 
@@ -99,7 +108,7 @@ class ToDo extends Component {
               this.state.todos.map((todo, index)=>{
                 if(todo.status == 'incomplete'){
                 return(
-                  <Cell complete={this.completedToDo} status={todo.status} text={todo.name} remove={this.removeToDo} num={index}/>
+                  <Cell update={this.updateChange} complete={this.completedToDo} status={todo.status} text={todo.name} remove={this.removeToDo} num={index}/>
                 )
               }
               })
@@ -109,7 +118,7 @@ class ToDo extends Component {
               this.state.todos.map((todo, index)=>{
                 if (todo.status == 'complete'){
                   return(
-                  <Cell complete={this.completedToDo} status={todo.status} text={todo.name} remove={this.removeToDo} num={index}/>
+                  <Cell update={this.updateChange} complete={this.completedToDo} status={todo.status} text={todo.name} remove={this.removeToDo} num={index}/>
                   )
                 }
                 
