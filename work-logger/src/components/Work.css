@@ -1,0 +1,21 @@
+.todo{
+	margin-top: 25px;
+}
+
+.item-desc p{
+	color: red;
+	text-align: left;
+
+}
+.item-desc {
+	max-width: 70%;
+
+}
+
+.item-time p{
+	text-align: center;
+}
+
+.item-time {
+	max-width: 45%;
+}
