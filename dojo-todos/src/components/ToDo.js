@@ -90,7 +90,7 @@ class ToDo extends Component {
         if(phase == 'all'){
           count = 
           <div className='col text-center'>
-              <p className='link'>{this.state.todos.length} todos</p>
+              <p className='link'>{this.state.todos.length} to-do's</p>
           </div>
           content = 
               this.state.todos.map((todo, index)=>{

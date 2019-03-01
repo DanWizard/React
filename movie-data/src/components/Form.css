@@ -1,0 +1,37 @@
+form{
+	width: 600px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+.form{
+	width: 350px;
+	margin: 0 auto;
+}
+
+.input{
+	width: 200px;
+	position: absolute;
+	border-radius: 20px;
+}
+
+.search-button{
+	position: relative;
+	left: 40px;
+	top: 3px;
+}	
+
+i{
+	position: relative;
+	left: 7.5px;
+	bottom: 0px;
+	top: 5px;
+}
+
+#not-show{
+	display: none;
+}
+
+#show{
+	display: inline-block;
+}

@@ -24,7 +24,7 @@ class Form extends Component {
     todo.min = minutes
     todo.total_min = this.state.minutes
     this.setState({todo: todo}, this.props.add(todo))
-    this.setState({todo: {}})
+    // this.setState({todo: {}})
   }
 
   handleChange(evt){
