@@ -6,25 +6,50 @@ class Content extends Component {
 		super(props)
 	}
   	render() {
-  	  return (
-  	    <div className="container movie">
-  	      <div className='row'>
-  	      	<div className='col data'>
-  	      		<h4><strong>Year:</strong></h4>
-  	      	</div>
-  	      </div>
-  	      <div className='row'>
-  	      	<div className='col data'>
-  	      		<h4><strong>Director:</strong></h4>
-  	      	</div>
-  	      </div>
-  	      <div className='row'>
-  	      	<div className='col data'>
-  	      		<h4><strong>Plot:</strong></h4>
-  	      	</div>
-  	      </div>
-  	    </div>
-  	  );
+
+  		let content
+  		if(this.props.movie.data){
+  			console.log('movieContent', this.props.movie.data.Response)
+  			if(this.props.movie.data.Response == 'True'){
+  				content =
+  				<div> 
+  				<div className='row'>
+  	  		    	<div className='col data'>
+  	  		    		<h4><strong>Year:</strong> {this.props.movie.data.Title}</h4>
+  	  		    	</div>
+  	  		    </div>
+  	  		    <div className='row'>
+  	  		    	<div className='col data'>
+  	  		    		<h4><strong>Director:</strong> {this.props.movie.data.Director}</h4>
+  	  		    	</div>
+  	  		    </div>
+  	  		    <div className='row'>
+  	  		    	<div className='col data'>
+  	  		    		<h4><strong>Plot:</strong> {this.props.movie.data.Plot}</h4>
+  	  		    	</div>
+  	  		    </div>
+  	  		    </div>	
+  			}
+  			if(this.props.movie.data.Response == 'False'){
+  				content =
+  				<div className='row'>
+  	  		    	<div className='col data'>
+  	  		    		<h4><strong>{this.props.movie.data.Error}</strong></h4>
+  	  		    	</div>
+  	  		    </div>
+  	  		}
+  		}
+  		
+  		
+  		
+
+
+
+  	  	return (
+  	  	  <div className="container movie">
+  	  	    {content}
+  	  	  </div>
+  	  	);
   	}
 }
 
