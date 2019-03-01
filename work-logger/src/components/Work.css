@@ -19,3 +19,11 @@
 .item-time {
 	max-width: 45%;
 }
+
+.title{
+	display: inline-block;
+}
+
+.total-time{
+	display: inline-block;
+}

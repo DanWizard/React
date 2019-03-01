@@ -9,8 +9,8 @@ class App extends Component {
 		super(props)
 		this.state = {
 			personal_todos: [],
-			personal_time_total_hours: '',
-			personal_time_total_min: '',
+			personal_time_total_hours: 0,
+			personal_time_total_min: 0,
 			work_todos: [],
 			work_time_total_hours: 0,
 			work_time_total_min: 0
@@ -22,7 +22,15 @@ class App extends Component {
 		console.log('todo', todo)
 		if(todo.title == 'personal'){
 			const Ptodos = Object.assign([], this.state.personal_todos)
-			this.setState({personal_todos:Ptodos.concat(todo)})
+			this.setState({personal_todos:Ptodos.concat(todo)}, () => {
+				const todos = Object.assign([], this.state.personal_todos)
+  				let total = 0
+  				todos.map((td) => total += parseInt(td.total_min))
+  				console.log('first run through', this.state.personal_todos)
+  				let hours = (total / 60) >> 0
+  				let min = total - (hours * 60)
+    			this.setState({personal_time_total_hours: hours, personal_time_total_min: min})
+			})
 		}
 		else{
 			const Wtodos = Object.assign([], this.state.work_todos)
@@ -45,7 +53,7 @@ class App extends Component {
       	<h1 className='text-center'>Work Logger</h1>
       		<Form  add={this.addTodo}/>
       	<div className='row cards'>
-      		<Personal todos={this.state.personal_todos}/>
+      		<Personal total_hours={this.state.personal_time_total_hours} total_min= {this.state.personal_time_total_min} todos={this.state.personal_todos}/>
       		<Work total_hours={this.state.work_time_total_hours} total_min= {this.state.work_time_total_min} todos={this.state.work_todos}/>
       	</div>
       </div>
