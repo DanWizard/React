@@ -3,6 +3,7 @@
 	border: solid black;
 	border-width: 2px;
 	margin-top: 50px;
+	position: relative;
 }
 
 img{
@@ -25,4 +26,34 @@ h1{
 	border: solid black;
 	border-width: 2px;
 	margin: 0 5px;
+}
+
+.result{
+	margin-top: 25px;
+}
+
+.answer-chosen{
+	max-width: 200px;
+	margin: 0 auto;
+	border: solid black;
+	border-width: 2px;
+}
+
+.score{
+	
+	
+	position: absolute;
+	left: 85%;
+	font-size: 50px;
+	top: 3%;
+}
+
+
+.time{
+	
+	
+	position: absolute;
+	left: 5%;
+	font-size: 50px;
+	top: 3%;
 }
